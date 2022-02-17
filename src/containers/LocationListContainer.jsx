@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 
 import LocationList from '../components/LocationList'
 import { connect } from 'react-redux'
-import { setCity } from '../actions'
+import { setSelectedCity } from '../actions'
 
 class LocationListContainer extends Component {
 
@@ -30,7 +30,7 @@ LocationListContainer.propTypes = {
 
 // mapDispatchToPropsActions = retorna un objeto con una funcion que dispara con el dispatch
 const mapDispatchToPropsActions = dispatch => ({
-    setCity: value => dispatch(setCity(value))
+    setCity: value => dispatch(setSelectedCity(value))
 })
 
 export default connect(null, mapDispatchToPropsActions)(LocationListContainer);
