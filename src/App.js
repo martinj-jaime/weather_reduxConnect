@@ -4,12 +4,9 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import { Grid, Row, Col } from 'react-flexbox-grid';
 import Paper from 'material-ui/Paper';
 import AppBar from 'material-ui/AppBar';
-import LocationList from './components/LocationList';
-import ForecastExtended from './components/ForecastExtended';
 
-import { setCity } from './actions'
-import { connect } from 'react-redux'
-import { PropTypes } from 'prop-types'
+import LocationListCointainer from './containers/LocationListContainer'
+import ForecastExtendedContainer from './containers/ForecastExtendedContainer';
 
 import './App.css';
 
@@ -28,13 +25,6 @@ class App extends Component {
     this.state = { city: null };
   }
 
-  handleSelectedLocation = city => {
-    this.setState({ city });
-    console.log(`handleSelectedLocation ${city}`);
-
-    this.props.setCity(city)
-  }
-  
   render() {
     const { city } = this.state;
     return (
@@ -48,17 +38,15 @@ class App extends Component {
           </Row>
           <Row>
             <Col xs={12} md={6}>
-              <LocationList cities={cities} 
-              onSelectedLocation={this.handleSelectedLocation} ></LocationList>
+              <LocationListCointainer cities={cities} />
             </Col>
             <Col xs={12} md={6}>
               <Paper zDepth={4}>
                 <div className='detail'>
                   {
                     city && 
-                    <ForecastExtended city={city}></ForecastExtended>
+                    <ForecastExtendedContainer />
                   }
-
                 </div>
               </Paper>
             </Col>
@@ -69,12 +57,4 @@ class App extends Component {
   }
 }
 
-App.propTypes = {
-  setCity: PropTypes.func.isRequired
-}
-
-const mapDispatchToPropsActions = dispatch => ({
-  setCity: value => dispatch(setCity(value))
-})
-
-export default connect(null, mapDispatchToPropsActions)(App);
+export default App
