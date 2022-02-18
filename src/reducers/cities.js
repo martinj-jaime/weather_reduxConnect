@@ -1,4 +1,4 @@
-
+import { createSelector } from 'reselect'
 import { SET_FORECAST_DATA } from '../actions'
 
 // reducers
@@ -14,3 +14,8 @@ export const cities = (state = {}, action) => {
             return state
     }
 }
+
+// state no es global
+export const getForecastDataFromCities = createSelector(
+    (state, city) => state[city] && state[city].forecastData, forecastData => forecastData
+)
